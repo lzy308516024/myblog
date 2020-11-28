@@ -1,6 +1,16 @@
 let express = require('express')
-
+let path = require('path')
 let app = express()
+// 设置模板引擎
+app.set('view engine','html')
+// 指定模板的存放根目录
+app.set('views',path.resolve('views'))
+
+// 指定对于html类型的模板可以使用ejs方法来进行渲染
+app.engine('html',require('ejs').__express)
+
+
+
 let index = require('./routes/index');
 let user = require('./routes/user')
 let article = require('./routes/article')

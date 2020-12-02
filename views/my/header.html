@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title%></title>
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+  <style>
+    .nav-img {
+      width: 35px;
+      height: 35px;
+    }
+    .media {
+      width: 100%;
+      margin: 20px auto;
+      padding:20px;
+      border: 1px dashed #ccc;
+    }
+    .media-left {
+      margin-right: 20px;
+    }
+    .pagination li {
+      margin:0 20px;
+    }
+    .pagination .active a{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-left">
+    <div class="container-fluid">
+      <div class="navbar-header d-flex justify-content-start align-items-center w-100">
+        <a class="navbar-brand" href="#">我的博客</a>
+        <ul class="nav navbar-nav d-flex flex-row justify-content-center align-items-center">
+          <li class="px-5"><a href="/">首页</a></li>
+          <%if(user){ %>
+              <li class="px-5"><a href="/user/signout">退出</a></li>
+              <li class="px-5"><a href="/article/add">发表</a></li>
+            <% }else{ %>
+              <li class="px-5"><a href="/user/signin">注册</a></li>
+              <li class="px-5"><a href="/user/signup">登录</a></li>
+            <%}%>
+          
+          
+          
+        </ul>
+        <%if(user){%>
+          <ul class="nav navbar-nav nav-right">
+            <li><a href="#">
+              <img class="nav-img" src="<%=user.avatar%>" alt="">
+              <%=user.username%>
+            </a></li>
+          </ul>
+        <%}%>
+
+        <form action="/" role="search" class="d-flex px-4 align-item-center pt-3">
+          <div class="form-group">
+            <input type="text" class="form-control" value="<%=keyword%>" name="keyword" placeholder="请输入关键字">
+          </div>
+          <button type="submit" style="height: 38px;" class="btn btn-primary">搜索</button>
+        </form>
+        
+      </div>
+      <div class="container">
+        <%if(success){%>
+          <div class="alert alert-success"><%=success%></div>
+        <%}%>
+        <%if(error){%>
+          <div class="alert alert-danger"><%=error%></div>
+        <%}%>
+        
